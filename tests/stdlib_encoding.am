@@ -1,0 +1,78 @@
+// Test sample for amalgame-framework-encoding.
+//
+// Imports the Amalgame.Encoding module + uses Base64 / Hex / Url
+// classes to verify that:
+//   1. amc auto-promotes the facade to `--external` via the
+//      lock-discovered package (project F follow-up, PR #377).
+//   2. gcc links the user binary against the per-package archive.
+//   3. Behaviour matches the bundled stdlib version pre-extraction.
+//
+// Note: avoid the bare word "ns" + "pace" in comments — amc's
+// first-pass scan grabs the first occurrence of that keyword and
+// uses the following identifier as the bundle prefix, so an
+// off-hand mention of it in a comment hijacks the cgen name.
+
+namespace UserApp
+
+import Amalgame.Encoding
+import Amalgame.Collections
+
+public class Program {
+    public static void Main() {
+        // ── Base64 (operates on List<int> bytes) ──────
+        let bytes: List<int> = new List<int>()
+        bytes.Add(72)  // 'H'
+        bytes.Add(101) // 'e'
+        bytes.Add(108) // 'l'
+        bytes.Add(108) // 'l'
+        bytes.Add(111) // 'o'
+        let b64: string = Base64.Encode(bytes)
+        if (b64 == "SGVsbG8=") {
+            Console.WriteLine("[PASS] b64 encode Hello")
+        } else {
+            Console.WriteLine("[FAIL] b64 got '" + b64 + "'")
+        }
+        let back: List<int> = Base64.Decode(b64)
+        if (back.Count() == 5 && back.Get(0) == 72 && back.Get(4) == 111) {
+            Console.WriteLine("[PASS] b64 round trip")
+        } else {
+            Console.WriteLine("[FAIL] b64 round trip count=" + String_FromInt(back.Count()))
+        }
+        if (Base64.IsValid("SGVsbG8=")) {
+            Console.WriteLine("[PASS] b64 IsValid true")
+        } else {
+            Console.WriteLine("[FAIL] b64 IsValid")
+        }
+
+        // ── Hex (operates on List<int> bytes) ─────────
+        let abytes: List<int> = new List<int>()
+        abytes.Add(65) // 'A'
+        abytes.Add(66) // 'B'
+        let hex: string = Hex.Encode(abytes)
+        if (hex == "4142") {
+            Console.WriteLine("[PASS] hex encode AB")
+        } else {
+            Console.WriteLine("[FAIL] hex got '" + hex + "'")
+        }
+        let hbytes: List<int> = Hex.Decode("4142")
+        if (hbytes.Count() == 2 && hbytes.Get(0) == 65 && hbytes.Get(1) == 66) {
+            Console.WriteLine("[PASS] hex decode AB")
+        } else {
+            Console.WriteLine("[FAIL] hex decode count=" + String_FromInt(hbytes.Count()))
+        }
+
+        // ── Url percent-encoding (operates on strings) ─
+        let url: string = Url.Encode("hello world")
+        if (url == "hello%20world") {
+            Console.WriteLine("[PASS] url encode space")
+        } else {
+            Console.WriteLine("[FAIL] url got '" + url + "'")
+        }
+        let dec: string = Url.Decode("hello%20world")
+        if (dec == "hello world") {
+            Console.WriteLine("[PASS] url decode space")
+        } else {
+            Console.WriteLine("[FAIL] url decode got '" + dec + "'")
+        }
+    }
+}

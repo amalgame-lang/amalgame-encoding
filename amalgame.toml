@@ -1,0 +1,34 @@
+# Package manifest — amalgame-framework-encoding
+#
+# Pure-Amalgame encoding facade (Base64 / Hex / percent-encode).
+# Originally bundled in amc's src/stdlib/encoding.am; extracted
+# into this external package as part of the framework split
+# (project F follow-up, amc >= 0.7.5).
+#
+# Installation:
+#
+#   amc package add encoding                    # via curated index
+#   amc package add github.com/amalgame-lang/amalgame-framework-encoding@v0.1.0
+#
+# At install time amc precompiles `facade.am` into
+# `<pkg-cache>/build/<platform>/libamalgame-pkg-Encoding.a` (PR #377
+# infra). User builds then auto-pass `--external facade.am` and
+# auto-link the archive — no per-build re-parse of the facade.
+
+[package]
+name              = "amalgame-framework-encoding"
+version           = "0.1.0"
+license           = "Apache-2.0"
+description       = "Pure-Amalgame encoding facade: Base64 (RFC 4648), Hex, percent-encode (RFC 3986)."
+authors           = ["Bastien Mouget"]
+required-amalgame = ">=0.7.6"
+schema-version    = 1
+
+[stdlib]
+class     = "Encoding"
+header    = "facade-stub.h"
+namespace = "Amalgame.Encoding"
+# Pure-AM facade — compiled at install time into the per-package
+# archive `libamalgame-pkg-Encoding.a`. Cgen emits forward decls
+# only at user compile; symbols resolve at link time.
+facade    = "facade.am"
