@@ -1,4 +1,4 @@
-# amalgame-framework-encoding
+# amalgame-encoding
 
 Pure-Amalgame encoding facade for [Amalgame](https://github.com/amalgame-lang/Amalgame).
 Three stateless helpers: **Base64** (RFC 4648), **Hex**, **percent-encoding** (RFC 3986).
@@ -10,7 +10,7 @@ this external package as part of the framework split (post-v0.7.5).
 
 ```bash
 amc package add encoding                    # via the curated index
-amc package add github.com/amalgame-lang/amalgame-framework-encoding@v0.1.0
+amc package add github.com/amalgame-lang/amalgame-encoding@v0.1.0
 ```
 
 Requires **amc 0.7.6+** for the facade pre-compile pipeline
