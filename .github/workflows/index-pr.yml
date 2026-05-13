@@ -37,10 +37,10 @@ jobs:
             amalgame-database-sqlite)        SHORT="sqlite" ;;
             amalgame-database-nosql-redis)   SHORT="redis"  ;;
             amalgame-messaging-mqtt)         SHORT="mqtt"   ;;
-            amalgame-framework-encoding)     SHORT="encoding" ;;
-            amalgame-framework-crypto)       SHORT="crypto"   ;;
-            amalgame-framework-random)       SHORT="random"   ;;
-            amalgame-framework-math)         SHORT="math"     ;;
+            amalgame-encoding)     SHORT="encoding" ;;
+            amalgame-crypto)       SHORT="crypto"   ;;
+            amalgame-random)       SHORT="random"   ;;
+            amalgame-math)         SHORT="math"     ;;
             *) SHORT="$NAME" ;;
           esac
           {

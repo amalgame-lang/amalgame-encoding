@@ -1,4 +1,4 @@
-# Package manifest — amalgame-framework-encoding
+# Package manifest — amalgame-encoding
 #
 # Pure-Amalgame encoding facade (Base64 / Hex / percent-encode).
 # Originally bundled in amc's src/stdlib/encoding.am; extracted
@@ -8,7 +8,7 @@
 # Installation:
 #
 #   amc package add encoding                    # via curated index
-#   amc package add github.com/amalgame-lang/amalgame-framework-encoding@v0.1.0
+#   amc package add github.com/amalgame-lang/amalgame-encoding@v0.1.0
 #
 # At install time amc precompiles `facade.am` into
 # `<pkg-cache>/build/<platform>/libamalgame-pkg-Encoding.a` (PR #377
@@ -16,7 +16,7 @@
 # auto-link the archive — no per-build re-parse of the facade.
 
 [package]
-name              = "amalgame-framework-encoding"
+name              = "amalgame-encoding"
 version           = "0.1.0"
 license           = "Apache-2.0"
 description       = "Pure-Amalgame encoding facade: Base64 (RFC 4648), Hex, percent-encode (RFC 3986)."

@@ -1,4 +1,4 @@
-# NOTICE — amalgame-framework-encoding
+# NOTICE — amalgame-encoding
 
 ## Authorship
 
